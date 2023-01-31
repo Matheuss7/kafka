@@ -1,0 +1,27 @@
+    Instalacao Kafka
+    helm install kafka my-repo/kafka -n kafka -f values.yml
+
+
+    kubectl run kafka-client --restart='Never' --image docker.io/bitnami/kafka:3.3.1-debian-11-r34 --namespace kafka --command -- sleep infinity
+    kubectl exec --tty -i kafka-client --namespace kafka -- bash
+
+    PRODUCER:
+        kafka-console-producer.sh \
+            --broker-list kafka-0.kafka-headless.kafka.svc.cluster.local:9092 \
+            --topic USER_UPDATED
+
+    CONSUMER:
+        kafka-console-consumer.sh \
+            --bootstrap-server kafka.kafka.svc.cluster.local:9092 \
+            --topic test \
+            --from-beginning
+
+Criacao ingress Kafka
+htpasswd -c auth kafka
+kubectl create secret generic kafka-basic-auth --from-file=auth -n kafka
+kubectl get secrets -n kafka kafka-basic-auth -o yaml
+kubectl apply -f kafka-ingress.yaml
+
+User ingress Kafka
+kafka
+asdf!@#$            

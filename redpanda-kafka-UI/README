@@ -1,0 +1,3 @@
+Instalacao Redpanda - UI kafka
+
+helm install redpanda-console redpanda-console/console -n kafka -f values.yml

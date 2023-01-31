@@ -1,0 +1,6 @@
+console:
+  config:
+    kafka:
+      brokers:
+        - kafka-headless.kafka.svc.cluster.local:9092
+      clientId: redpanda-console
